@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - '5000:5000'
+    env_file: # Esto asegura que Docker cargue el archivo .env
+      - .env
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:7.0.12
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
